@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>V-Transport</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <style>
+          .item {
+              color: blue;
+          }
+          .hidden {
+              display: none;
+          }
+      </style>
+    </head>
+    <body>
+      <h1>V-Transport</h1>
+    
+      <form onSubmit="addVehicle(event)">
+        <label>Modelo</label>
+        <input type="text" id="model" placeholder="Ingrese el modelo aquí" autocomplete="off"/>
+        <p id="error-msg" class="hidden">No existe el modelo ingreado</p>
+        <br />
+        <button type="submit">Agregar</button>
+      </form>
+    
+      <h2>Vehiculos ingresados <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button></h2>
+      <ul id="vehicles"></ul>
+      <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button>
+      <button class="btn-report" type="button" onclick="onReportButtonClicked()">generar reporte</button>
+      <script src="main.js"></script>
+    </body>
+</html>
