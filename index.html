@@ -13,6 +13,14 @@
           .hidden {
               display: none;
           }
+          .report {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+              background-color: #ccc;
+          }
       </style>
     </head>
     <body>
@@ -29,7 +37,19 @@
       <h2>Vehiculos ingresados <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button></h2>
       <ul id="vehicles"></ul>
       <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button>
-      <button class="btn-report" type="button" onclick="onReportButtonClicked()">generar reporte</button>
-      <script src="main.js"></script>
+      <button class="btn-report" type="button" onclick="onReportButtonClicked()">manifiesto</button>
+
+      <section class="report hidden">
+          <button class="close-report" type="button" onclick="closeReport()">X</button>
+          <h2>Manifiesto</h2>
+          <h3>Vehiculos por Fabricante</h3>
+          <ul id="vehicles-by-brand"></ul>
+          <h3>Vehiculos por tipo</h3>
+          <ul id="vehicles-by-type"></ul>
+          <h3>Vehiculos por modelo</h3>
+          <ul id="vehicles-by-model"></ul>
+      </section>
+
+      <script src="main.js"></script>      
     </body>
 </html>

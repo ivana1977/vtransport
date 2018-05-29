@@ -103,6 +103,7 @@ const saveInLocalStorage = () => {
 /** Maneja el evento del boton generar reporte */
 const onReportButtonClicked = () => {
   const reportData = generateReportData(vehiclesArray);
+  renderReport();
   console.log(reportData);
 }
 
@@ -162,6 +163,16 @@ const extractReportDataFromMatrix = (matrix) => {
   return [brandsData, typesData, modelsData];
 }
 
+/** */
+const renderReport = () => {
+  reportDOM.classList.remove('hidden');
+}
+
+/** */
+const closeReport = () => {  
+  reportDOM.classList.add('hidden');
+}
+
 const brands = ['Fiat', 'Renault', 'Chevrolet', 'Ford', 'VW'];
 // models
 const modelsFiat = [['palio', 'uno', 'linea', 'argo'], [], ['fiorino'], ['toro']];
@@ -169,6 +180,8 @@ const modelsRenault = [['megane', 'kiwi', 'zandero'], ['koleos', 'duster'], ['ka
 const modelsChevrolet = [['cruze', 'corsa'], ['tracker'], [], ['s-10']];
 const modelsFord = [['fiesta', 'focus'], [], ['transit'], ['ranger']];
 const modelsVW = [['ka', 'gol', 'vento', 'passat', 'bora'], [], [], ['amarok']];
+
+const reportDOM = document.querySelector('.report');
 
 // recupero los vehiculos de la local storage
 let vehiclesArray = localStorage.getItem('vehicles') ? JSON.parse(localStorage.getItem('vehicles')) : [];
