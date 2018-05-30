@@ -1,0 +1,23 @@
+{
+  "name": "vtransport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiasfessia/vtransport.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matiasfessia/vtransport/issues"
+  },
+  "scripts": {
+    "start": "live-server"
+  },
+  "homepage": "https://github.com/matiasfessia/vtransport#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
