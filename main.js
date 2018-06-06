@@ -1,6 +1,6 @@
 /** Carga los vehiculos que estan en la localStorage a la lista */
 const loadVehicles = (vehicles) => {
-  let lista = document.getElementById('vehicles');
+  let lista = document.querySelector('.vehicles');
   vehicles.forEach(model => {
     lista.appendChild(createVehicleNode(model));
   });
@@ -12,12 +12,12 @@ const addVehicle = (evt) => {
   evt.preventDefault();
   let model = document.getElementById('model');
   if (!isValidModel(model.value.toLowerCase())) {
-    const errorText = document.getElementById('error-msg');
-    errorText.classList.remove('hidden');
-    setTimeout(function(){ errorText.classList.add('hidden'); }, 3000);
+    const errorText = document.querySelector('.error-msg');
+    errorText.innerHTML = 'No existe el modelo ingreado';
+    setTimeout(function(){ errorText.innerHTML = ''; }, 3000);
     return false;
   }
-  let lista = document.getElementById('vehicles');  
+  let lista = document.querySelector('.vehicles');  
   lista.appendChild(createVehicleNode(model.value));
   vehiclesArray.push(model.value);
   saveInLocalStorage();
@@ -29,12 +29,24 @@ const addVehicle = (evt) => {
 /** Crea un node del DOM para agregar el vehiculo a la lista */
 const createVehicleNode = model => {
   let liDOM = document.createElement('li');
+  liDOM.setAttribute('onclick', `onVehicleTap(event)`);
   liDOM.appendChild(document.createTextNode(model));
+
   let btn = document.createElement('button');
-  btn.textContent = 'x';
+  btn.setAttribute('class', 'btn-delete');
   btn.setAttribute('onclick', `removeVehicle(event, '${model}')`);
+  btn.innerHTML = '<i class="fas fa-trash"></i>';    
   liDOM.appendChild(btn);
   return liDOM;
+}
+
+const onVehicleTap = (e) => {
+  const liDOM = e.target;
+  if (liDOM.classList.contains('active')) {
+    liDOM.classList.remove('active');
+  } else {
+    liDOM.classList.add('active');
+  }
 }
 
 /** Quita un vehiculo de la lista */
@@ -71,7 +83,7 @@ const isValidModel = model => {
 const deleteAll = () => {
   const consultar = confirm(`¿Estas seguro de eliminar todos los vehiculos cargados?`);
   if (consultar === true) {
-    document.getElementById('vehicles').innerHTML = '';
+    document.querySelector('.vehicles').innerHTML = '';
     vehiclesArray = [];
     saveInLocalStorage();    
     onVehiclesChange();
@@ -83,15 +95,19 @@ const deleteAll = () => {
  * En algún futuro se podrá usar Array.observe pero aun es es7 https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/observe
  */
 const onVehiclesChange = () => {
-  const buttons = document.querySelectorAll('.btn-limpiar');
+  const buttons = document.querySelectorAll('.btn-delete-all');
+  const badge = document.querySelector('.count-badge');
   if (vehiclesArray.length === 0) {
     for (btn of buttons) {
       btn.classList.add('hidden');
     }
-  } else {   
+    badge.classList.add('hidden');    
+  } else {
     for (btn of buttons) {
       btn.classList.remove('hidden');
     }
+    badge.classList.remove('hidden');
+    badge.innerHTML = `[${vehiclesArray.length}]`;
   }
 }
 
@@ -104,7 +120,37 @@ const saveInLocalStorage = () => {
 const onReportButtonClicked = () => {
   const reportData = generateReportData(vehiclesArray);
   renderReport();
+  populateListResult('vehicles-by-brand', reportData[0]);
+  populateListResult('vehicles-by-type', reportData[1]);
+  populateListResult('vehicles-by-model', reportData[2]);
+
+  const vehiclesByModelDOM = document.querySelector('.vehicles-by-model');
   console.log(reportData);
+}
+
+/** Popula una lista con los resultados */
+const populateListResult = (list, results) => {
+  const vehiclesByBrandDOM = document.querySelector(`.${list}`);
+  vehiclesByBrandDOM.innerHTML = '';
+  results.forEach((item, index) => {
+    const li = document.createElement('li');
+    if (Array.isArray(item[0])) {
+      // por modelo
+      li.appendChild(document.createTextNode(brands[index]));
+      const subList = document.createElement('ul');
+      item.forEach(model => {
+        console.log(model);
+        const suLi = document.createElement('li');
+        suLi.appendChild(document.createTextNode(`${model[0]}: ${model[1]}`))
+        subList.appendChild(suLi);
+      })
+      li.appendChild(subList);
+    } else {
+      // por fabricante o tipo
+      li.appendChild(document.createTextNode(`${item[0]}: ${item[1]}`));
+  }
+    vehiclesByBrandDOM.appendChild(li);
+  });
 }
 
 /** Crea la matriz para hacer los calculos de vehiculos por fabricante y tipo. */
@@ -165,12 +211,14 @@ const extractReportDataFromMatrix = (matrix) => {
 
 /** */
 const renderReport = () => {
+  loadVehiclesDOM.classList.add('hidden');
   reportDOM.classList.remove('hidden');
 }
 
 /** */
 const closeReport = () => {  
   reportDOM.classList.add('hidden');
+  loadVehiclesDOM.classList.remove('hidden');
 }
 
 const brands = ['Fiat', 'Renault', 'Chevrolet', 'Ford', 'VW'];
@@ -182,6 +230,7 @@ const modelsFord = [['fiesta', 'focus'], [], ['transit'], ['ranger']];
 const modelsVW = [['ka', 'gol', 'vento', 'passat', 'bora'], [], [], ['amarok']];
 
 const reportDOM = document.querySelector('.report');
+const loadVehiclesDOM = document.querySelector('.load-vehicles');
 
 // recupero los vehiculos de la local storage
 let vehiclesArray = localStorage.getItem('vehicles') ? JSON.parse(localStorage.getItem('vehicles')) : [];

@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #232323;
+}
+
+.title {
+  background-color: #6f81bc;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  padding: 15px;
+}
+
+.title em {
+  font-weight: 600;
+  font-style: normal;
+}
+
+.add-vehicle-form {
+  margin: 30px 15px 15px;
+}
+
+.add-vehicle-control {
+  display: flex;
+  height: 40px;
+  border: 1px solid #6f81bc;
+  border-radius: 3px;
+}
+
+.add-vehicle-control input {
+  flex-grow: 1;
+  font-size: 18px;
+  border: none;
+  outline: 0;
+  text-indent: 5px;
+  background: transparent
+}
+
+.add-vehicle-control input::-webkit-input-placeholder {
+  color: #d5d5d5;
+}
+
+.add-vehicle-control button {
+  width: 80px;
+  border: none;
+  color: #fff;
+  background-color:#6f81bc;
+}
+
+.error-msg {
+  margin: 3px 0;
+  color: #bf6e6e;
+  font-size: 14px;
+  height: 20px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 10px 0;
+  text-indent: 15px;
+}
+
+.subtitle .btn-delete-all {
+  float: right;
+  font-size: 24px;
+  margin-right: 15px;
+  color: #797979;
+}
+
+.btn-delete-all {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-delete-all-footer {
+  margin-bottom: 100px;
+  text-decoration: underline;
+  padding: 15px;
+}
+
+.vehicles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vehicles li {
+  border-bottom: 2px solid #f5f5f5;
+  padding: 12px 0;
+  text-indent: 15px;
+}
+
+.vehicles li .btn-delete {
+  display: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: #bf6e6e;
+  width: 50px;
+  height: 43px;
+  margin: -12px 0;
+  float: right;
+  color: #fff;
+  outline: 0;
+}
+
+.vehicles li.active {
+  font-weight: 500;
+}
+.vehicles li.active .btn-delete {
+  display: inline-block;
+}
+
+.btn-report {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: none;
+  background-color: #86a978;
+  color: #fff;
+  height: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -webkit-box-shadow: 0px -10px 5px 0px rgba(245,245,245,1);
+  -moz-box-shadow: 0px -10px 5px 0px rgba(245,245,245,1);
+  box-shadow: 0px -10px 5px 0px rgba(245,245,245,1);
+}
+
+.hidden {
+  display: none;
+}
+
+.report {
+  background-color: #eaeaea;
+  padding-bottom: 50px;
+}
+
+.report .close-report {
+  float: right;
+  border: none;
+  background-color: transparent;
+  color: #797979;
+  font-size: 30px;
+  padding: 10px;
+}
+
+.report h2 {
+  margin: 0 15px;
+  padding: 15px 0 5px 0; 
+  border-bottom: 2px solid #797979;
+  margin-bottom: 5px;
+}
+.report h3 {
+  margin: 15px;
+}
+
+.report > ul {
+  margin: 15px 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.report > ul > li > ul {
+  list-style: square;
+}

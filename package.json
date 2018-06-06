@@ -16,8 +16,8 @@
     "start": "live-server"
   },
   "homepage": "https://github.com/matiasfessia/vtransport#readme",
-  "dependencies": {},
   "devDependencies": {
+    "font-awesome": "^4.7.0",
     "live-server": "^1.2.0"
   }
 }

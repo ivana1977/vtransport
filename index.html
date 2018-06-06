@@ -5,49 +5,36 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>V-Transport</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      
-      <style>
-          .item {
-              color: blue;
-          }
-          .hidden {
-              display: none;
-          }
-          .report {
-              position: absolute;
-              width: 100%;
-              height: 100%;
-              top: 0;
-              left: 0;
-              background-color: #ccc;
-          }
-      </style>
+      <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-      <h1>V-Transport</h1>
-    
-      <form onSubmit="addVehicle(event)">
-        <label>Modelo</label>
-        <input type="text" id="model" placeholder="Ingrese el modelo aquí" autocomplete="off"/>
-        <p id="error-msg" class="hidden">No existe el modelo ingreado</p>
-        <br />
-        <button type="submit">Agregar</button>
-      </form>
-    
-      <h2>Vehiculos ingresados <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button></h2>
-      <ul id="vehicles"></ul>
-      <button class="btn-limpiar hidden" type="button" onclick="deleteAll()">eliminar todos</button>
-      <button class="btn-report" type="button" onclick="onReportButtonClicked()">manifiesto</button>
-
+      <h1 class="title"><em>VT</em>ransport</h1>
+      
+      <section class="load-vehicles">
+      
+        <form onSubmit="addVehicle(event)" class="add-vehicle-form">
+          <div class="add-vehicle-control">
+              <input type="text" id="model" placeholder="Ingrese el modelo aquí" autocomplete="off"/>
+              <button type="submit">Agregar</button>
+          </div>
+          <p class="error-msg"></p>
+        </form>
+      
+        <h2 class="subtitle">Vehiculos ingresados <span class="count-badge"></span><button class="btn-delete-all hidden" type="button" onclick="deleteAll()"><i class="fa fa-times-circle"></i></button></h2>
+        <ul class="vehicles"></ul>
+        <button class="btn-delete-all btn-delete-all-footer hidden" type="button" onclick="deleteAll()">eliminar todos</button>
+        <button class="btn-report" type="button" onclick="onReportButtonClicked()">Imprimir manifiesto</button>
+      </section>
+      
       <section class="report hidden">
-          <button class="close-report" type="button" onclick="closeReport()">X</button>
+          <button class="close-report" type="button" onclick="closeReport()"><i class="fa fa-arrow-circle-down"></i></button>
           <h2>Manifiesto</h2>
           <h3>Vehiculos por Fabricante</h3>
-          <ul id="vehicles-by-brand"></ul>
+          <ul class="vehicles-by-brand"></ul>
           <h3>Vehiculos por tipo</h3>
-          <ul id="vehicles-by-type"></ul>
+          <ul class="vehicles-by-type"></ul>
           <h3>Vehiculos por modelo</h3>
-          <ul id="vehicles-by-model"></ul>
+          <ul class="vehicles-by-model"></ul>
       </section>
 
       <script src="main.js"></script>      
